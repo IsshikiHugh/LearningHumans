@@ -1,0 +1,8 @@
+# Python Cache
+__pycache__
+
+# Editor Files
+.vscode
+
+# Mac Files
+.DS_Store
