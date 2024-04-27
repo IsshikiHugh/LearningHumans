@@ -1,5 +1,6 @@
 # Python Cache
 __pycache__
+*.egg-info
 
 # Editor Files
 .vscode
