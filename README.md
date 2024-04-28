@@ -10,7 +10,13 @@ This repository aims to provide code snippets and examples for common human moti
 
 ### Environment
 
-- [ ] TODO
+```shell
+conda create -n lh python=3.8
+conda activate lh
+
+pip install -r requirements.txt
+pip install -e .
+```
 
 ### Data
 
@@ -35,12 +41,18 @@ Here is the recommended order to read the notebooks if you are totally new to th
 ## Todo List
 
 ### About the Main Content
+
 - [ ] Skeletons
 - [ ] Parameters Models
     - [x] SMPL basic
     - [ ] SMPL-H basic
     - [ ] SMPL-X basic
     - [ ] SMPL details
+- [ ] Common Metrics
+    - {PA, WA, W2A, normal} x {MPJPE, MPVE}
+    - Accel, AccelErr, Jitter
+    - FootSliding
+    - ...
 
 ### Something Less Important
 
