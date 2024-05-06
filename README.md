@@ -31,18 +31,18 @@ All the snippets are in the jupyter notebooks under the `notebooks` folder.
 Here is the recommended order to read the notebooks if you are totally new to this field:
 
 1. [Rotation Representation](notebooks/rotation_representation.ipynb)
-2. Skeletons
+2. \(🛠️ *WIP*\) [Skeletons](notebooks/skeletons.ipynb)
 3. [SMPL Basic](notebooks/SMPL_basic.ipynb)
 4. SMPLH and SMPLX
 5. SMPL Details
 6. T.B.C.
 
 
-## Todo List
+## Todo List / Help Wanted
 
 ### About the Main Content
 
-- [ ] Skeletons
+- [ ] Skeletons (rough now)
 - [ ] Parameters Models
     - [x] SMPL basic
     - [ ] SMPL-H basic
@@ -58,9 +58,15 @@ Here is the recommended order to read the notebooks if you are totally new to th
 
 - [ ] Colab Support
 - [ ] Chinese Translation
+- [ ] Better Display
 
 ## Acknowledgements
 
 This project benefits a lot from the following resources:
 
-- [ ] TODO
+- Motivations
+    - [learning_research](https://github.com/pengsida/learning_research)
+    - [learning_nerf](https://github.com/pengsida/learning_nerf)
+    - [LearningMotion](https://github.com/phj128/LearningMotion)
+- Contents Details
+    - [ ] TODO
