@@ -3,3 +3,5 @@ pytorch3d==0.7.4
 setuptools==69.1.0
 torch==2.3.0
 torchgeometry==0.1.2
+wis3d==1.0.1
+smplx==0.1.28
