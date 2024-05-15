@@ -38,21 +38,24 @@ Here is the recommended order to read the notebooks if you are totally new to th
 6. T.B.C.
 
 
-## Todo List / Help Wanted
+## Todo List
 
 ### About the Main Content
 
-- [ ] Skeletons (rough now)
+- [ ] Skeletons (quite rough now)
 - [ ] Parameters Models
     - [x] SMPL basic
-    - [ ] SMPL-H basic
-    - [ ] SMPL-X basic
+    - [ ] SMPL-H & SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
-- [ ] Common Metrics
-    - {PA, WA, W2A, normal} x {MPJPE, MPVE}
-    - Accel, AccelErr, Jitter
-    - FootSliding
-    - ...
+- [ ] Msic
+    - [ ] useful visualization tools
+        - [ ] Wis3D
+        - [ ] matplotlib
+        - ...
+    - [ ] useful data processing tools (path walking, file dumping, etc.)
+        - [ ] pathlib.Path, ...
+        - [ ] shutil, ...
+        - [ ] torch.save, np.save, np.savez, joblib.dump...
 
 ### Something Less Important
 
