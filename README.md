@@ -2,9 +2,13 @@
 
 This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models.
 
-> [!TIP]
+> [!TIP] Preface
 >
-> 👋 Welcome! As a newbie to this field, I'm not sure I can provide a comprehensive guide for this field. 📖 But I think it's a good way to learn better by writing down what I've learned and I will try my best to make this project wonderful. So, if you find any mistakes (including typos) or have any suggestions, please feel free to open an issue or PR. Thanks!
+> 👋 Welcome! As a newbie to this field, I'm not sure I can provide a comprehensive guide for this field.
+>
+> 📖 But I think it's a good way to learn better by writing down what I've learned and I will try my best to make this project wonderful. So, if you find any mistakes (including typos) or have any suggestions, please feel free to open an issue or PR. Thanks!
+>
+> ✨ Things you will meet actually will be more complex then I present here. It's quite important for you to learn how to solve the specific problem you meet. For example, many researcher will use their own version of SMPL-like model instead to meet their specific needs.
 
 ## Preparation
 
@@ -14,13 +18,13 @@ This repository aims to provide code snippets and examples for common human moti
 conda create -n lh python=3.8
 conda activate lh
 
-pip install -r requirements.txt
-pip install -e .
+pip install -r requirements.txt  # install the required packages
+pip install -e .                 # install the local package
 ```
 
 ### Data
 
-Some notebooks may need some extra data downloaded from the internet. They can be checkpoints of models or datasets. The instruction of how to download them will be provided in notebooks that need them.
+Some notebooks may need some extra data downloaded from the internet. They can be checkpoints of models or datasets or something else. The instruction of how to download them will be provided in notebooks that need them.
 
 ## Usage
 
