@@ -33,9 +33,10 @@ Here is the recommended order to read the notebooks if you are totally new to th
 1. [Rotation Representation](notebooks/rotation_representation.ipynb)
 2. \(🛠️ *WIP*\) [Skeletons](notebooks/skeletons.ipynb)
 3. [SMPL Basic](notebooks/SMPL_basic.ipynb)
-4. SMPLH and SMPLX
-5. SMPL Details
-6. T.B.C.
+4. SMPLH Basic
+5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
+6. SMPL Details
+7. T.B.C.
 
 
 ## Todo List
@@ -45,7 +46,8 @@ Here is the recommended order to read the notebooks if you are totally new to th
 - [ ] Skeletons (quite rough now)
 - [ ] Parameters Models
     - [x] SMPL basic
-    - [ ] SMPL-H & SMPL-X basic (compared to SMPL)
+    - [ ] SMPL-H basic (compared to SMPL)
+    - [x] SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
 - [ ] Msic
     - [ ] useful visualization tools
