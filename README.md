@@ -2,7 +2,7 @@
 
 This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models.
 
-> [!TIP] Preface
+> [!TIP]
 >
 > 👋 Welcome! As a newbie to this field, I'm not sure I can provide a comprehensive guide for this field.
 >
