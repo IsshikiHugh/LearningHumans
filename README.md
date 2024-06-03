@@ -39,6 +39,7 @@ Here is the recommended order to read the notebooks if you are totally new to th
 3. [SMPL Basic](notebooks/SMPL_basic.ipynb)
 4. SMPLH Basic
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
+5. [Skel Basic](notebooks/Skel_basic.ipynb)
 6. SMPL Details
 7. T.B.C.
 
@@ -53,6 +54,7 @@ Here is the recommended order to read the notebooks if you are totally new to th
     - [ ] SMPL-H basic (compared to SMPL)
     - [x] SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
+    - [ ] Skel basic
 - [ ] Msic
     - [ ] useful visualization tools
         - [ ] Wis3D
