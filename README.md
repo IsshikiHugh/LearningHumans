@@ -1,14 +1,14 @@
-# LearningHuman
+# LearningHumans
 
-This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models.
+This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models. You might think of this project as a simple starting tutorial rather than an advanced tutorial.
 
 > [!TIP]
 >
-> 👋 Welcome! As a newbie to this field, I'm not sure I can provide a comprehensive guide for this field.
+> 👋 Welcome! I hope this project will help you!
 >
-> 📖 But I think it's a good way to learn better by writing down what I've learned and I will try my best to make this project wonderful. So, if you find any mistakes (including typos) or have any suggestions, please feel free to open an issue or PR. Thanks!
+> 📖 As a newbie to this field, I can't ensure a comprehensive guide here. But I think it's a good way to improve for the better through sharing what I've learned. I will try my best to improve this project. If you find any mistakes (anything) or have any suggestions, please feel free to open issues or PRs. Thanks!
 >
-> ✨ Things you will meet actually will be more complex then I present here. It's quite important for you to learn how to solve the specific problem you meet. For example, many researcher will use their own version of SMPL-like model instead to meet their specific needs.
+> ✨ Things you will meet actually will be more complex then I present here. It's quite important for you to learn how to solve specific problems you meet. For instance, many researcher will use their own variation of SMPL model instead to meet their specific needs.
 
 ## Preparation
 
@@ -24,15 +24,15 @@ pip install -e .                 # install the local package
 
 ### Data
 
-Some notebooks may need some extra data downloaded from the internet. They can be checkpoints of models or datasets or something else. The instruction of how to download them will be provided in notebooks that need them.
+Some sections require extra data downloaded from the internet. They can be checkpoints of models or datasets or something else. The instructions of how to download them will be provided in notebooks in which you need those data.
 
 ## Usage
 
-The support codes are placed in `lib` folder. They are mainly some utility functions for visualization or logging or data organization or something else. You can just ignore them if you are not interested in them.
+The supporting codes are placed in `lib` folder. They are mainly some utility functions for visualization or logging or data organization or something else. You can just ignore them.
 
 All the snippets are in the jupyter notebooks under the `notebooks` folder.
 
-Here is the recommended order to read the notebooks if you are totally new to this field:
+Here is one recommended order to read the notebooks:
 
 1. [Rotation Representation](notebooks/rotation_representation.ipynb)
 2. \(🛠️ *WIP*\) [Skeletons](notebooks/skeletons.ipynb)
