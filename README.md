@@ -39,9 +39,9 @@ Here is the recommended order to read the notebooks if you are totally new to th
 3. [SMPL Basic](notebooks/SMPL_basic.ipynb)
 4. SMPLH Basic
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
-5. [Skel Basic](notebooks/Skel_basic.ipynb)
-6. SMPL Details
-7. T.B.C.
+6. \(🛠️ *WIP*\) [SMPL Details](notebooks/SMPL_details.ipynb)
+7. Skel Basic
+8. T.B.C.
 
 
 ## Todo List
