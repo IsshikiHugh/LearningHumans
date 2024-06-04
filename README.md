@@ -6,9 +6,9 @@ This repository aims to provide code snippets and examples for common human moti
 >
 > 👋 Welcome! I hope this project will help you!
 >
-> 📖 As a newbie to this field, I can't ensure a comprehensive guide here. But I think it's a good way to improve for the better through sharing what I've learned. I will try my best to improve this project. If you find any mistakes (anything) or have any suggestions, please feel free to open issues or PRs. Thanks!
+> 📖 As a newbie to this field, I can't ensure a comprehensive guidance here. But I think it's a good way to improve for the better through sharing what I've learned. I will try my best to improve this project. If you find any mistakes (anything) or have any suggestions, please feel free to open issues or PRs. Thanks!
 >
-> ✨ Things you will meet actually will be more complex then I present here. It's quite important for you to learn how to solve specific problems you meet. For instance, many researcher will use their own variation of SMPL model instead to meet their specific needs.
+> ✨ Problems you will actually meet will be more complex then I present here. It's quite important for you to learn how to solve the specific problems. For instance, many researcher will use their own variation of SMPL model instead, as they may have specific needs.
 
 ## Preparation
 
@@ -24,11 +24,11 @@ pip install -e .                 # install the local package
 
 ### Data
 
-Some sections require extra data downloaded from the internet. They can be checkpoints of models or datasets or something else. The instructions of how to download them will be provided in notebooks in which you need those data.
+Some sections require extra data to be downloaded. (They can be checkpoints of models or datasets or something else.) The instructions about how to download them will be provided in specific notebooks in which you need those data.
 
 ## Usage
 
-The supporting codes are placed in `lib` folder. They are mainly some utility functions for visualization or logging or data organization or something else. You can just ignore them.
+The supporting codes are placed in `lib` folder. They are mainly some utilities for visualization or logging or data organization or something else. You can just ignore them.
 
 All the snippets are in the jupyter notebooks under the `notebooks` folder.
 
@@ -43,6 +43,7 @@ Here is one recommended order to read the notebooks:
 7. Skel Basic
 8. T.B.C.
 
+---
 
 ## Todo List
 
@@ -80,4 +81,4 @@ This project benefits a lot from the following resources:
     - [learning_nerf](https://github.com/pengsida/learning_nerf)
     - [LearningMotion](https://github.com/phj128/LearningMotion)
 - Contents Details
-    - [ ] TODO
+    - Check the references in the notebooks.
