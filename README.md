@@ -40,7 +40,7 @@ Here is one recommended order to read the notebooks:
 4. SMPLH Basic
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
 6. \(🛠️ *WIP*\) [SMPL Details](notebooks/SMPL_details.ipynb)
-7. Skel Basic
+7. SKEL Basic
 8. T.B.C.
 
 ---
@@ -55,16 +55,16 @@ Here is one recommended order to read the notebooks:
     - [ ] SMPL-H basic (compared to SMPL)
     - [x] SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
-    - [ ] Skel basic
+    - [ ] SKEL basic
 - [ ] Msic
     - [ ] useful visualization tools
-        - [ ] Wis3D
-        - [ ] matplotlib
+        - [ ] `Wis3D`
+        - [ ] `matplotlib`
         - ...
     - [ ] useful data processing tools (path walking, file dumping, etc.)
-        - [ ] pathlib.Path, ...
-        - [ ] shutil, ...
-        - [ ] torch.save, np.save, np.savez, joblib.dump...
+        - [ ] `pathlib.Path`, ...
+        - [ ] `shutil`, ...
+        - [ ] `torch.save`, `np.save`, `np.savez`, `joblib.dump`...
 
 ### Something Less Important
 
