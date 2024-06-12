@@ -37,7 +37,7 @@ Here is one recommended order to read the notebooks:
 1. [Rotation Representation](notebooks/rotation_representation.ipynb)
 2. \(🛠️ *WIP*\) [Skeletons](notebooks/skeletons.ipynb)
 3. [SMPL Basic](notebooks/SMPL_basic.ipynb)
-4. SMPLH Basic
+4. [SMPLH Basic](notebooks/SMPLH_basic.ipynb)
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
 6. \(🛠️ *WIP*\) [SMPL Details](notebooks/SMPL_details.ipynb)
 7. SKEL Basic
@@ -52,7 +52,7 @@ Here is one recommended order to read the notebooks:
 - [ ] Skeletons (quite rough now)
 - [ ] Parameters Models
     - [x] SMPL basic
-    - [ ] SMPL-H basic (compared to SMPL)
+    - [x] SMPL-H basic (compared to SMPL)
     - [x] SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
     - [ ] SKEL basic
