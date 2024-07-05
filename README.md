@@ -43,6 +43,11 @@ Here is one recommended order to read the notebooks:
 7. SKEL Basic
 8. T.B.C.
 
+I also provide some code snippets of some common tasks:
+
+1. [Parallel Tasks](notebooks/parallel.ipynb)
+2. T.B.C.
+
 ---
 
 ## Todo List
@@ -57,6 +62,7 @@ Here is one recommended order to read the notebooks:
     - [ ] SMPL details
     - [ ] SKEL basic
 - [ ] Msic
+    - [x] parallel tasks
     - [ ] useful visualization tools
         - [ ] `Wis3D`
         - [ ] `matplotlib`
