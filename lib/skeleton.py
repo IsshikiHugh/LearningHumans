@@ -1,5 +1,3 @@
-# The joints definition are copied from [ROMP](https://github.com/Arthur151/ROMP/blob/4eebd3647f57d291d26423e51f0d514ff7197cb3/romp/lib/constants.py#L58)
-
 class Skeleton():
     bones = []
     bone_colors = []
@@ -7,6 +5,8 @@ class Skeleton():
     parent = []
 
 class Skeleton_SMPL24(Skeleton):
+    # The joints definition are copied from
+    # [ROMP](https://github.com/Arthur151/ROMP/blob/4eebd3647f57d291d26423e51f0d514ff7197cb3/romp/lib/constants.py#L58)
     chains = [
         [0, 1, 4, 7, 10],         # left leg
         [0, 2, 5, 8, 11],         # right leg
