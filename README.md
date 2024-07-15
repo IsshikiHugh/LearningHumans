@@ -1,6 +1,6 @@
 # LearningHumans
 
-This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models. You might think of this project as a simple starting tutorial rather than an advanced tutorial.
+This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models. You might think of this project as a simple starting tutorial rather than an advanced tutorial. And it's also my notebook.
 
 > [!TIP]
 >
@@ -40,7 +40,7 @@ Here is one recommended order to read the notebooks:
 4. [SMPLH Basic](notebooks/SMPLH_basic.ipynb)
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
 6. \(🛠️ *WIP*\) [SMPL Details](notebooks/SMPL_details.ipynb)
-7. SKEL Basic
+7. \(🛠️ *WIP*\) [SKEL Basic](notebooks/SKEL_basic.ipynb)
 8. T.B.C.
 
 I also provide some code snippets of some common tasks:
