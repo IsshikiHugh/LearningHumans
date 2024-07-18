@@ -40,7 +40,7 @@ Here is one recommended order to read the notebooks:
 4. [SMPLH Basic](notebooks/SMPLH_basic.ipynb)
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
 6. \(🛠️ *WIP*\) [SMPL Details](notebooks/SMPL_details.ipynb)
-7. \(🛠️ *WIP*\) [SKEL Basic](notebooks/SKEL_basic.ipynb)
+7. SKEL Basic
 8. T.B.C.
 
 I also provide some code snippets of some common tasks:
