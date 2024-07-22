@@ -43,7 +43,7 @@ Here is one recommended order to read the notebooks:
 7. SKEL Basic
 8. T.B.C.
 
-I also provide some code snippets of some common tasks:
+I also provide some code snippets for some common tasks:
 
 1. [Parallel Tasks](notebooks/parallel.ipynb)
 2. T.B.C.
@@ -64,8 +64,9 @@ I also provide some code snippets of some common tasks:
 - [ ] Msic
     - [x] parallel tasks
     - [ ] useful visualization tools
-        - [ ] `Wis3D`
+        - [ ] `wis3d`
         - [ ] `matplotlib`
+        - [ ] `pytorch3d`
         - ...
     - [ ] useful data processing tools (path walking, file dumping, etc.)
         - [ ] `pathlib.Path`, ...
