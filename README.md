@@ -1,14 +1,14 @@
 # LearningHumans
 
-This repository aims to provide code snippets and examples for common human motion utilities, for example, varies kinds of motion expression from skeletons to parameters models. You might think of this project as a simple starting tutorial rather than an advanced tutorial. And it's also my notebook.
+This repository aims to provide code snippets and examples for common virtual human utilities, for example, varies kinds of representation from skeletons to parameters models. You can regard this project as just a simple starting tutorial.
 
 > [!TIP]
 >
 > 👋 Welcome! I hope this project will help you!
 >
-> 📖 As a newbie to this field, I can't ensure a comprehensive guidance here. But I think it's a good way to improve for the better through sharing what I've learned. I will try my best to improve this project. If you find any mistakes (anything) or have any suggestions, please feel free to open issues or PRs. Thanks!
+> 📖 As a newbie to this field, I can't ensure a comprehensive guidance here. But I think it's a good way to improve for the better through sharing what I've learned. I will try my best to improve this project. If you find **any** mistakes or have **any** suggestions, please feel free to open issues or PRs. Thanks!
 >
-> ✨ Problems you will actually meet will be more complex then I present here. It's quite important for you to learn how to solve the specific problems. For instance, many researcher will use their own variation of SMPL model instead, as they may have specific needs.
+> ✨ Problems you will meet in practice will be more complex. I think it's important to learn how to solve a specific problem without full set of guides. For instance, some researcher will use their own variation of SMPL model.
 
 ## Preparation
 
@@ -35,7 +35,7 @@ All the snippets are in the jupyter notebooks under the `notebooks` folder.
 Here is one recommended order to read the notebooks:
 
 1. [Rotation Representation](notebooks/rotation_representation.ipynb)
-2. \(🛠️ *WIP*\) [Skeletons](notebooks/skeletons.ipynb)
+2. \(🛠️ *WIP*\) [Abstract Skeletons](notebooks/abstract_skeletons.ipynb)
 3. [SMPL Basic](notebooks/SMPL_basic.ipynb)
 4. [SMPLH Basic](notebooks/SMPLH_basic.ipynb)
 5. [SMPLX Basic](notebooks/SMPLX_basic.ipynb)
@@ -52,10 +52,8 @@ I also provide some code snippets for some common tasks:
 
 ## Todo List
 
-### About the Main Content
-
-- [ ] Skeletons (quite rough now)
-- [ ] Parameters Models
+- [ ] Abstract Skeletons (quite rough now)
+- [ ] Parameter Models
     - [x] SMPL basic
     - [x] SMPL-H basic (compared to SMPL)
     - [x] SMPL-X basic (compared to SMPL)
@@ -73,11 +71,6 @@ I also provide some code snippets for some common tasks:
         - [ ] `shutil`, ...
         - [ ] `torch.save`, `np.save`, `np.savez`, `joblib.dump`...
 
-### Something Less Important
-
-- [ ] Colab Support
-- [ ] Chinese Translation
-- [ ] Better Display
 
 ## Acknowledgements
 
