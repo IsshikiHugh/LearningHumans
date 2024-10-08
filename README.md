@@ -59,13 +59,14 @@ I also provide some code snippets for some common tasks:
     - [x] SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
     - [ ] SKEL basic
-- [ ] Msic
+- [ ] Misc
     - [x] parallel tasks
     - [ ] useful visualization tools
         - [ ] `wis3d`
+        - [ ] `viser`
         - [ ] `matplotlib`
         - [ ] `pytorch3d`
-        - ...
+        - [ ] ...
     - [ ] useful data processing tools (path walking, file dumping, etc.)
         - [ ] `pathlib.Path`, ...
         - [ ] `shutil`, ...
