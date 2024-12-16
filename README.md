@@ -65,7 +65,8 @@ I also provide some code snippets for some common tasks:
         - [ ] `wis3d`
         - [ ] `viser`
         - [ ] `matplotlib`
-        - [ ] `pytorch3d`
+        - [ ] `pyrender`
+        - [ ] `pytorch3d` renderer
         - [ ] ...
     - [ ] useful data processing tools (path walking, file dumping, etc.)
         - [ ] `pathlib.Path`, ...
