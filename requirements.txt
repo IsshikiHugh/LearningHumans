@@ -1,5 +1,5 @@
 numpy==1.24.3
-pytorch3d==0.7.4
+# pytorch3d==0.7.4  # only macos can install p3d through this way
 setuptools==69.1.0
 torch==2.3.0
 torchgeometry==0.1.2

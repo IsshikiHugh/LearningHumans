@@ -22,6 +22,11 @@ pip install -r requirements.txt  # install the required packages
 pip install -e .                 # install the local package
 ```
 
+Then, you need to install `pytorch3d`:
+
+- For macOS user, please use `pip install pytorch3d==0.7.4`.
+- For Linux user, according to [this](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md), if you know your environment version, I recommend you to [install wheels directly](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md#2-install-wheels-for-linux), otherwise, [installing from GitHub](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md#1-install-from-github) would be easier (but slower).
+
 ### Data
 
 Some sections require extra data to be downloaded. (They can be checkpoints of models or datasets or something else.) The instructions about how to download them will be provided in specific notebooks in which you need those data.
