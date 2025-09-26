@@ -45,7 +45,7 @@ class HWis3D(Wis3D):
         for i in range(L):
             self.set_scene_id(i + offset)
             self.add_point_cloud(
-                vertices = verts[i + offset],
+                vertices = verts[i],
                 colors   = None,
                 name     = name,
             )
@@ -91,8 +91,8 @@ class HWis3D(Wis3D):
         for i in range(L):
             self.set_scene_id(i + offset)
             self.add_lines(
-                start_points = joints[i + offset][bones[:, 0]],
-                end_points   = joints[i + offset][bones[:, 1]],
+                start_points = joints[i][bones[:, 0]],
+                end_points   = joints[i][bones[:, 1]],
                 colors       = colors,
                 name         = name,
             )
@@ -144,8 +144,8 @@ class HWis3D(Wis3D):
         for i in range(L):
             self.set_scene_id(i)
             self.add_lines(
-                start_points = start_pts[i + offset],
-                end_points   = end_pts[i + offset],
+                start_points = start_pts[i],
+                end_points   = end_pts[i],
                 colors       = grad_colors,
                 name         = name,
             )
