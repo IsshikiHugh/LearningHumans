@@ -1,12 +1,21 @@
+# Modified from:
+# https://github.com/IsshikiHugh/HSMR/blob/main/lib/utils/vis/wis3d.py
+
+
 import torch
 
 from typing import Union
 from wis3d import Wis3D
 from pytorch3d import transforms
+import torch
+import numpy as np
+
+from typing import Union, List, overload
+from wis3d import Wis3D
 
 
 class HWis3D(Wis3D):
-    """ Abstraction of Wis3D for human motion. """
+    ''' Abstraction of Wis3D for human motion. '''
 
     def __init__(
         self,
@@ -17,28 +26,126 @@ class HWis3D(Wis3D):
         seq_name = seq_name.replace('/', '-')
         super().__init__(out_path, seq_name, xyz_pattern)
 
-    def add_motion_verts(
+
+    def add_text(self, text:str):
+        '''
+        Add an item of vertices whose name is used to put the text message. *Dirty use!*
+
+        ### Args
+        - text: str
+        '''
+        fake_verts = np.array([[0, 0, 0]])
+        self.add_point_cloud(
+            vertices = fake_verts,
+            colors   = None,
+            name     = text,
+        )
+
+
+    def add_text_seq(self, texts:List[str], offset:int=0):
+        '''
+        Add an item of vertices whose name is used to put the text message. *Dirty use!*
+
+        ### Args
+        - texts: List[str]
+            - The list of text messages.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        '''
+        fake_verts = np.array([[0, 0, 0]])
+        for i, text in enumerate(texts):
+            self.set_scene_id(i + offset)
+            self.add_point_cloud(
+                vertices = fake_verts,
+                colors   = None,
+                name     = text,
+            )
+
+    def add_image_seq(self, imgs:List[np.ndarray], name:str, offset:int=0):
+        '''
+        Add an item of vertices whose name is used to put the image. *Dirty use!*
+
+        ### Args
+        - imgs: List[np.ndarray]
+            - The list of images.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        '''
+        for i, img in enumerate(imgs):
+            self.set_scene_id(i + offset)
+            self.add_image(
+                image = img,
+                name  = name,
+            )
+
+    def add_motion_mesh(
         self,
-        verts : torch.Tensor,
+        verts : Union[torch.Tensor, np.ndarray],
+        faces : Union[torch.Tensor, np.ndarray],
         name  : str,
         offset: int = 0,
     ):
-        """
+        '''
+        Add sequence of vertices and face(s) to the wis3d viewer.
+
+        ### Args
+        - verts: torch.Tensor or np.ndarray, (L, V, 3), L ~ sequence length, V ~ number of vertices
+        - faces: torch.Tensor or np.ndarray, (F, 3) or (L, F, 3), F ~ number of faces, L ~ sequence length
+        - name: str
+            - The name of the point cloud.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        '''
+        assert (len(verts.shape) == 3), 'The input `verts` should have 3 dimensions: (L, V, 3).'
+        assert (verts.shape[-1] == 3), 'The last dimension of `verts` should be 3.'
+        if isinstance(verts, np.ndarray):
+            verts = torch.from_numpy(verts)
+        if isinstance(faces, torch.Tensor):
+            faces = faces.detach().cpu().numpy()
+        if len(faces.shape) == 2:
+            faces = faces[None].repeat(verts.shape[0], 0)
+        assert (len(faces.shape) == 3), 'The input `faces` should have 2 or 3 dimensions: (F, 3) or (L, F, 3).'
+        assert (faces.shape[-1] == 3), 'The last dimension of `faces` should be 3.'
+        assert (verts.shape[0] == faces.shape[0]), 'The first dimension of `verts` and `faces` should be the same.'
+
+        L, _, _ = verts.shape
+        verts = verts.detach().cpu()
+
+        # Add vertices frame by frame.
+        for i in range(L):
+            self.set_scene_id(i + offset)
+            self.add_mesh(
+                vertices = verts[i],
+                faces    = faces[i],
+                name     = name,
+            )  # type: ignore
+
+        # Reset Wis3D scene id.
+        self.set_scene_id(0)
+
+
+    def add_motion_verts(
+        self,
+        verts : Union[torch.Tensor, np.ndarray],
+        name  : str,
+        offset: int = 0,
+    ):
+        '''
         Add sequence of vertices to the wis3d viewer.
 
         ### Args
-        - `verts`: torch.Tensor
-            - shape = (L, V, 3), L is the sequence length, V is the number of vertices
-        - `name`: str
-            - the name of the point cloud
-        - `offset`: int, default = 0
-            - the offset for the sequence index
-        """
+        - verts: torch.Tensor or np.ndarray, (L, V, 3), L ~ sequence length, V ~ number of vertices
+        - name: str
+            - The name of the point cloud.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        '''
         assert (len(verts.shape) == 3), 'The input `verts` should have 3 dimensions: (L, V, 3).'
         assert (verts.shape[-1] == 3), 'The last dimension of `verts` should be 3.'
+        if isinstance(verts, np.ndarray):
+            verts = torch.from_numpy(verts)
 
-        # Get the sequence length.
-        L, V, _ = verts.shape
+        L, _, _ = verts.shape
         verts = verts.detach().cpu()
 
         # Add vertices frame by frame.
@@ -53,52 +160,68 @@ class HWis3D(Wis3D):
         # Reset Wis3D scene id.
         self.set_scene_id(0)
 
+
     def add_motion_skel(
         self,
-        joints : torch.Tensor,
-        bones  : Union[list, torch.Tensor],
-        colors : Union[list, torch.Tensor],
-        name   : str,
-        offset : int = 0,
+        joints    : Union[torch.Tensor, np.ndarray],
+        bones     : Union[list, torch.Tensor],
+        colors    : Union[list, torch.Tensor],
+        name      : str,
+        offset    : int = 0,
+        threshold : float = 0.5,
     ):
-        """
+        '''
         Add sequence of joints with specific skeleton to the wis3d viewer.
 
         ### Args
-        - `joints`: torch.Tensor
-            - shape = (L, J, 3), L is the sequence length, J is the number of joints
-        - `bones`: list
-            - A list of bones of the skeleton, i.e. the edge in the kinematic trees. A bone is represented
-              as
-        - `colors`: list
-        - `name`: str
-            - the name of the point cloud
-        - `offset`: int, default = 0
-            - the offset for the sequence index
-        """
+        - joints: torch.Tensor or np.ndarray, shape = (L, J, 3) or (L, J, 4), L ~ sequence length, J ~ number of joints
+        - bones: list
+            - A list of bones of the skeleton, i.e. the edge in the kinematic trees.
+        - colors: list
+        - name: str
+            - The name of the point cloud.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        - threshold: float, default = 0.5
+            - Threshold to filter the confidence of the joints. It's useless when no confidence provided.
+        '''
         assert (len(joints.shape) == 3), 'The input `joints` should have 3 dimensions: (L, J, 3).'
-        assert (joints.shape[-1] == 3), 'The last dimension of `joints` should be 3.'
-        if isinstance(bones, list):
+        assert (joints.shape[-1] == 3 or joints.shape[-1] == 4), 'The last dimension of `joints` should be 3 or 4.'
+        if isinstance(joints, np.ndarray):
+            joints = torch.from_numpy(joints)
+        if isinstance(bones, List):
             bones = torch.tensor(bones)
-        if isinstance(colors, list):
+        if isinstance(colors, List):
             colors = torch.tensor(colors)
 
         # Get the sequence length.
-        L, J, _ = joints.shape
-        joints = joints.detach().cpu() # (L, J, 3)
+        joints = joints.detach().cpu() # (L, J, 3) or (L, J, 4)
+        L, J, D = joints.shape
+        if D == 4:
+            conf = joints[:, :, 3]
+            joints = joints[:, :, :3]
+        else:
+            conf = None
 
         # Add vertices frame by frame.
         for i in range(L):
             self.set_scene_id(i + offset)
-            self.add_lines(
-                start_points = joints[i][bones[:, 0]],
-                end_points   = joints[i][bones[:, 1]],
-                colors       = colors,
-                name         = name,
-            )
+            bones_s = joints[i][bones[:, 0]]
+            bones_e = joints[i][bones[:, 1]]
+            if conf is not None:
+                mask = torch.logical_and(conf[i][bones[:, 0]] > threshold, conf[i][bones[:, 1]] > threshold)
+                bones_s, bones_e = bones_s[mask], bones_e[mask]
+            if len(bones_s) > 0:
+                self.add_lines(
+                    start_points = bones_s,
+                    end_points   = bones_e,
+                    colors       = colors,
+                    name         = name,
+                )
 
         # Reset Wis3D scene id.
         self.set_scene_id(0)
+
 
     def add_vec_seq(
         self,
@@ -107,51 +230,53 @@ class HWis3D(Wis3D):
         offset  : int = 0,
         seg_num : int = 16,
     ):
-        """
+        '''
         Add directional line sequence to the wis3d viewer.
 
         The line will be gradient colored, and the direction of the vector is visualized as from dark to light.
 
         ### Args
-        - `vecs`: torch.Tensor
-            - shape = (L, 2, 3), L is the sequence length, then give the start 3D point and end 3D point.
-        - `name`: str
-            - the name of the vector
-        - `offset`: int, default = 0
-            - the offset for the sequence index
-        - `seg_num`: int, default = 16
-            - the number of segments for gradient color, will just change the visualization effect
-        """
-        assert (len(vecs.shape) == 3), 'The input `vecs` should have 3 dimensions: (L, 2, 3).'
-        assert (vecs.shape[-2:] == (2, 3)), 'The last two dimension of `vecs` should be (2, 3).'
+        - vecs: torch.Tensor, (L, 2, 3) or (L, N, 2, 3), L ~ sequence length, N ~ vectors counts in one frame,
+              then give the start 3D point and end 3D point.
+        - name: str
+            - The name of the vector.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        - seg_num: int, default = 16
+            - The number of segments for gradient color, will just change the visualization effect.
+        '''
+        if len(vecs.shape) == 3:
+            vecs = vecs[:, None, :, :] # (L, 2, 3) -> (L, 1, 2, 3)
+        assert (len(vecs.shape) == 4), 'The input `vecs` should have 3 or 4 dimensions: (L, 2, 3) or (L, N, 2, 3).'
+        assert (vecs.shape[-2:] == (2, 3)), f'The last two dimension of `vecs` should be (2, 3), but got vecs.shape = {vecs.shape}.'
 
         # Get the sequence length.
-        L, _, _ = vecs.shape
+        L, N, _, _ = vecs.shape
         vecs = vecs.detach().cpu()
 
         # Cut the line into segments.
-        steps_delta = (vecs[:, [1]] - vecs[:, [0]]) / (seg_num + 1) # (L, 1, 3)
-        steps_cnt   = torch.arange(seg_num + 1).reshape((1, seg_num + 1, 1)) # (1, seg_num+1, 1)
-        segs = torch.einsum('LxY,uSv->LSY', steps_delta, steps_cnt) # (L, seg_num+1, 3)
-        segs = segs + vecs[:, [0]] # (L, seg_num+1, 3)
-        start_pts = segs[:, :-1] # (L, seg_num, 3)
-        end_pts   = segs[:, 1:] # (L, seg_num, 3)
+        steps_delta = (vecs[:, :, [1]] - vecs[:, :, [0]]) / (seg_num + 1) # (L, N, 1, 3)
+        steps_cnt   = torch.arange(seg_num + 1).reshape((1, 1, seg_num + 1, 1)) # (1, 1, seg_num+1, 1)
+        segs = steps_delta * steps_cnt + vecs[:, :, [0]] # (L, N, seg_num+1, 3)
+        start_pts = segs[:, :, :-1] # (L, N, seg_num, 3)
+        end_pts   = segs[:, :, 1:] # (L, N, seg_num, 3)
 
         # Prepare the gradient colors.
-        grad_colors = torch.linspace(0, 255, seg_num).reshape((seg_num, 1)).repeat(1, 3) # (seg_num, 3)
+        grad_colors = torch.linspace(0, 255, seg_num).reshape((1, seg_num, 1)).repeat(N, 1, 3) # (N, seg_num, 3)
 
         # Add vertices frame by frame.
         for i in range(L):
-            self.set_scene_id(i)
+            self.set_scene_id(i + offset)
             self.add_lines(
-                start_points = start_pts[i],
-                end_points   = end_pts[i],
-                colors       = grad_colors,
+                start_points = start_pts[i].reshape(-1, 3),
+                end_points   = end_pts[i].reshape(-1, 3),
+                colors       = grad_colors.reshape(-1, 3),
                 name         = name,
             )
 
         # Reset Wis3D scene id.
         self.set_scene_id(0)
+
 
     def add_traj(
         self,
@@ -159,17 +284,16 @@ class HWis3D(Wis3D):
         name      : str,
         offset    : int = 0,
     ):
-        """
+        '''
         Visualize the the positions change across the time as trajectory. The newer position will be brighter.
 
         ### Args
-        - `positions`: torch.Tensor
-            - shape = (L, 3), L is the sequence length
-        - `name`: str
-            - the name of the trajectory
-        - `offset`: int, default = 0
-            - the offset for the sequence index
-        """
+        - positions: torch.Tensor, (L, 3), L ~ sequence length
+        - name: str
+            - The name of the trajectory.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        '''
         assert (len(positions.shape) == 2), 'The input `positions` should have 2 dimensions: (L, 3).'
         assert (positions.shape[-1] == 3), 'The last dimension of `positions` should be 3.'
 
@@ -194,6 +318,7 @@ class HWis3D(Wis3D):
         # Reset Wis3D scene id.
         self.set_scene_id(0)
 
+
     def add_sphere_sensors(
         self,
         positions  : torch.Tensor,
@@ -201,20 +326,17 @@ class HWis3D(Wis3D):
         activities : torch.Tensor,
         name       : str,
     ):
-        """
+        '''
         Draw the sphere sensors with different colors to represent the activities. The color is from white to red.
 
         ### Args
-        - `positions`: torch.Tensor
-            - shape = (N, 3), N is the number of sensors
-        - `radius`: torch.Tensor or float
-            - shape = (N,), N is the number of sensors
-        - `activities`: torch.Tensor
-            - shape = (N)
-            - the activities of the sensors, from 0 to 1
-        - `name`: str
-            - the name of the spheres
-        """
+        - positions: torch.Tensor, (N, 3), N ~ number of sensors
+        - radius: torch.Tensor or float, (N,), N ~ number of sensors
+        - activities: torch.Tensor, (N)
+            - The activities of the sensors, from 0 to 1.
+        - name: str
+            - The name of the spheres.
+        '''
         assert (len(positions.shape) == 2), 'The input `positions` should have 2 dimensions: (N, 3).'
         assert (positions.shape[-1] == 3), 'The last dimension of `positions` should be 3.'
         N, _ = positions.shape
@@ -234,6 +356,7 @@ class HWis3D(Wis3D):
             name    = name,
         )
 
+
     def add_sphere_sensors_seq(
         self,
         positions  : torch.Tensor,
@@ -242,22 +365,19 @@ class HWis3D(Wis3D):
         name       : str,
         offset     : int = 0,
     ):
-        """
+        '''
         Draw the sphere sensors with different colors to represent the activities. The color is from white to red.
 
         ### Args
-        - `positions`: torch.Tensor
-            - shape = (L, N, 3), N is the number of sensors
-        - `radius`: torch.Tensor or float
-            - shape = (L, N,), N is the number of sensors
-        - `activities`: torch.Tensor
-            - shape = (L, N)
-            - the activities of the sensors, from 0 to 1
-        - `name`: str
-            - the name of the spheres
-        - `offset`: int, default = 0
-            - the offset for the sequence index
-        """
+        - positions: torch.Tensor, (L, N, 3), N ~ number of sensors
+        - radius: torch.Tensor or float, (L, N,), N ~ number of sensors
+        - activities: torch.Tensor, (L, N)
+            - The activities of the sensors, from 0 to 1.
+        - name: str
+            - The name of the spheres.
+        - offset: int, default = 0
+            - The offset for the sequence index.
+        '''
         assert (len(positions.shape) == 3), 'The input `positions` should have 3 dimensions: (L, N, 3).'
         assert (positions.shape[-1] == 3), 'The last dimension of `positions` should be 3.'
         L, N, _ = positions.shape
@@ -270,6 +390,8 @@ class HWis3D(Wis3D):
                 activities = activities[i],
                 name       = name,
             )
+
+
     # ===== Overriding methods from original Wis3D. =====
 
 
@@ -282,25 +404,22 @@ class HWis3D(Wis3D):
         thickness   : float = 0.01,
         resolution  : int   = 4,
     ):
-        """
+        '''
         Add lines by points. Overriding the original `add_lines` method to use mesh to provide browser from crash.
 
         ### Args
-        - `start_points`: torch.Tensor
-            - shape = (N, 3), N is the number of lines
-        - `end_points`: torch.Tensor
-            - shape = (N, 3), N is the number of lines
-        - `colors`: list or torch.Tensor
-            - shape = (N, 3)
-            - the color of the lines, from 0 to 255
-        - `name`: str
-            - the name of the vector
-        - `thickness`: float, default = 0.01
-            - the thickness of the lines
-        - `resolution`: int, default = 3
-            - the 'line' was actually a poly-cylinder, and the resolution how it looks like a cylinder
-        """
-        if isinstance(colors, list):
+        - start_points: torch.Tensor, (N, 3), N ~ number of lines
+        - end_points: torch.Tensor, (N, 3), N ~ number of lines
+        - colors: list or torch.Tensor, (N, 3)
+            - The color of the lines, from 0 to 255.
+        - name: str
+            - The name of the vector.
+        - thickness: float, default = 0.01
+            - The thickness of the lines.
+        - resolution: int, default = 3
+            - The 'line' was actually a poly-cylinder, and the resolution how it looks like a cylinder.
+        '''
+        if isinstance(colors, List):
             colors = torch.tensor(colors)
 
         assert (len(start_points.shape) == 2), 'The input `start_points` should have 2 dimensions: (N, 3).'
@@ -330,7 +449,7 @@ class HWis3D(Wis3D):
         v_ending_temp = v_ending_temp[None].repeat(N, 1, 1) # (N, K, 3)
 
         # 2. Rotate the template plane to the direction of the line.
-        rot_axis = torch.cross(vec_y, dir) # (N, 3)
+        rot_axis = torch.linalg.cross(vec_y, dir) # (N, 3)
         rot_axis[neg_mask] *= -1
         rot_mat = transforms.axis_angle_to_matrix(rot_axis) # (N, 3, 3)
         v_ending_temp = v_ending_temp @ rot_mat.transpose(-1, -2)
@@ -365,7 +484,6 @@ class HWis3D(Wis3D):
 
         N, V = v_cylinder.shape[:2]
         v_cylinder = v_cylinder.reshape(-1, 3) # (N*(2*K), 3)
-
 
         # ===== Manually match the points index before flatten. =====
         f_cylinder = f_cylinder + torch.arange(0, N, device=device).unsqueeze(1).unsqueeze(1) * V
