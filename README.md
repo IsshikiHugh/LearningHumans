@@ -57,6 +57,7 @@ I also provide some code snippets for some common tasks:
 
 ## Todo List
 
+- [ ] Change the dependency to [ez4d](https://github.com/IsshikiHugh/ez4d) with a certain version.
 - [ ] Abstract Skeletons (quite rough now)
 - [ ] Parameter Models
     - [x] SMPL basic
