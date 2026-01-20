@@ -1,14 +1,14 @@
 # LearningHumans
 
-This repository aims to provide code snippets and examples for common virtual human utilities, for example, varies kinds of representation from skeletons to parameters models. You can regard this project as just a simple starting tutorial.
+This repository aims to provide code snippets and examples for common virtual human utilities, for example, various kinds of representation from skeletons to parametric models. You can regard this project as just a simple starting tutorial.
 
 > [!TIP]
 >
 > 👋 Welcome! I hope this project will help you!
 >
-> 📖 As a newbie to this field, I can't ensure a comprehensive guidance here. But I think it's a good way to improve for the better through sharing what I've learned. I will try my best to improve this project. If you find **any** mistakes or have **any** suggestions, please feel free to open issues or PRs. Thanks!
+> 📖 If you find **any** mistakes or have **any** suggestions, please feel free to open issues or PRs. Thanks!
 >
-> ✨ Problems you will meet in practice will be more complex. I think it's important to learn how to solve a specific problem without full set of guides. For instance, some researcher will use their own variation of SMPL model.
+> ✨ Problems you will meet in practice will be more complex. I think it's important to learn how to solve a specific problem without a full set of guides. For instance, some researchers will use their own variation of SMPL model.
 
 ## Preparation
 
@@ -29,11 +29,11 @@ Then, you need to install `pytorch3d`:
 
 ### Data
 
-Some sections require extra data to be downloaded. (They can be checkpoints of models or datasets or something else.) The instructions about how to download them will be provided in specific notebooks in which you need those data.
+Some sections require additional data to be downloaded (such as model checkpoints, datasets, or other resources). The instructions on how to download them will be provided in the specific notebooks where you need those data.
 
 ## Usage
 
-The supporting codes are placed in `lib` folder. They are mainly some utilities for visualization or logging or data organization or something else. You can just ignore them.
+The supporting codes are provided in the `lib` folder and the [`ez4d`](https://github.com/IsshikiHugh/ez4d) library. Codes in `lib` are mainly for notebook supports, and things in `ez4d` should be helpful for general human motion research.
 
 All the snippets are in the jupyter notebooks under the `notebooks` folder.
 
@@ -63,29 +63,16 @@ I also provide some code snippets for some common tasks:
     - [x] SMPL-H basic (compared to SMPL)
     - [x] SMPL-X basic (compared to SMPL)
     - [ ] SMPL details
-    - [ ] SKEL basic
+    - [x] SKEL basic
 - [ ] Misc
     - [x] parallel tasks
-    - [ ] useful visualization tools
-        - [ ] `wis3d`
-        - [ ] `viser`
-        - [ ] `matplotlib`
-        - [ ] `pyrender`
-        - [ ] `pytorch3d` renderer
-        - [ ] ...
-    - [ ] useful data processing tools (path walking, file dumping, etc.)
-        - [ ] `pathlib.Path`, ...
-        - [ ] `shutil`, ...
-        - [ ] `torch.save`, `np.save`, `np.savez`, `joblib.dump`...
-
 
 ## Acknowledgements
 
-This project benefits a lot from the following resources:
+This project greatly benefits from the following resources:
 
 - Motivations
     - [learning_research](https://github.com/pengsida/learning_research)
-    - [learning_nerf](https://github.com/pengsida/learning_nerf)
     - [LearningMotion](https://github.com/phj128/LearningMotion)
 - Contents Details
     - Check the references in the notebooks.
